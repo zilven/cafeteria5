@@ -5,21 +5,37 @@
     <form class="form">
         <div class="form-group">
             <div class="row">
-                <div class="col-xs-1">
-                    <input class="form-control" type="text" placeholder="#">
+                <div class="col-md-1">
+                    <input id="txtCantidad" class="form-control" type="text" placeholder="#">
                 </div>
-                <div class="col-xs-10">
-                    <select class="form-control">
+                <div class="col-md-10">
+                    <select id="slcComida" class="form-control">
                     @foreach($comidas as $comida)
-                        <option value="{{$comida->id}}">{{$comida->nombre}}</option>
+                        <option precio="{{$comida->precio}}" value="{{$comida->id}}">{{$comida->nombre}}</option>
                     @endforeach
                     </select>
                 </div>
-                <div class="col-xs-1">
-                    <button class="btn btn-primary" type="button">+</button>
+                <div class="col-md-1">
+                    <button id="btnAgregarElemento" class="btn btn-primary" type="button">+</button>
                 </div>
-            <select class="form-control"></select>
-            <button class="btn btn-primary">+<button>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped" id="tblPedido">
+                        <thead>
+                        
+                            <tr>
+                                <th>Cantidad</th>
+                                <th>Concepto</th>
+                                <th>Valor unitario</th>
+                                <th>Subtotal</th>
+                            </tr>
+                            
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 @endsection
 
@@ -29,4 +45,5 @@
 
 @section('customscripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="/js/createpedido.js"></script>
 @endsection
