@@ -55,7 +55,32 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nuevoPedido = new \App\Pedido;
+        $usuario = $request->user();
+        $nuevoPedido->idUsuario = $usuario->id;
+        $nuevoPedido->idEstadoPedido = 1;
+        $nuevoPedido->total = $request->input("hdTotal");
+
+        if($nuevoPedido->save()) {
+            $cantidades = $request->input("cantidades");
+            $nombres = $request->input("nombres");
+            $precios = $request->input("precios");
+            $subtotales = $request->input("subtotales");
+            $indice = 0;
+            foreach($cantidades as $cantidad) {
+                $nuevoElementoPedido = new \App\ElementoPedido;
+                $nuevoElementoPedido->idPedido = $nuevoPedido->id;
+                $nuevoElementoPedido->idComida = $ids[$indice];
+                $nuevoElementoPedido->nombreComida =
+                $precios[$indice];
+                $nuevoElementoPedido->cantidad =
+                $cantidades[$indice];
+                $nuevoElementoPedido->subtotal =
+                $subtotales[$indice];
+            }
+        } else{
+
+        }
     }
 
     /**

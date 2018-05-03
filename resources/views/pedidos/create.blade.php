@@ -2,7 +2,8 @@
 @section('content')
     <h1>Crear pedido</h1>
     
-    <form class="form">
+    <form method="POST" action="{{route('pedidos.store')}}">
+        {{csrf_field()}}
         <div class="form-group">
             <div class="row">
                 <div class="col-md-1">
@@ -11,7 +12,7 @@
                 <div class="col-md-10">
                     <select id="slcComida" class="form-control">
                     @foreach($comidas as $comida)
-                        <option precio="{{$comida->precio}}" value="{{$comida->id}}">{{$comida->nombre}}</option>
+                        <option precio="{{$comida->precio}}" idComida="{{$comida->id}}" value="{{$comida->id}}">{{$comida->nombre}}</option>
                     @endforeach
                     </select>
                 </div>
@@ -34,7 +35,22 @@
                         </thead>
                         <tbody>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Total</th>
+                                <th id="cellTotal">0.00</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Enviar Pedido</button>
+                    </div>
                 </div>
             </div>
 @endsection
